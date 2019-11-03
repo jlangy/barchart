@@ -1,1 +1,41 @@
+#bar-chart{
+  height: 400px;
+  width: 600px;
+  background: rgb(236, 221, 221);
+  border: black 1px solid;
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 10% 80% 10%;
+}
+#chart-title{
+  grid-column: span 2;
+  box-sizing: border-box;
+  border: green solid 1px;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+}
+#y-axis{
+  box-sizing: border-box;
+  border: red 2px solid;
+}
 
+#x-axis{
+  box-sizing: border-box;
+  border: blue 2px solid;
+  grid-column: 2;
+}
+
+#chart{
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.bar{
+  height: 50%;
+  box-sizing: border-box;
+  border: 2px solid black;
+}
