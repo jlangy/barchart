@@ -37,7 +37,6 @@
 }
 
 .bar{
-  height: 50%;
   box-sizing: border-box;
   border: 2px solid black;
 }
