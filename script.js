@@ -9,7 +9,7 @@ const Y_SPACING = 6;
 
 function loadData() {
   data.forEach(val => {
-    $('#chart').append("<div class='bar' style='height:" + unitHeight * val + "px'></div>");
+    $('#chart').append("<div class='bar' style='height:" + unitHeight * val + "px'>" + val + "</div>");
   });
 }
 

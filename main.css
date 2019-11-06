@@ -1,11 +1,14 @@
 #bar-chart{
   height: 400px;
   width: 600px;
-  background: rgb(236, 221, 221);
+  background: rgb(226, 123, 226);
   border: black 1px solid;
   display: grid;
   grid-template-columns: 10% 90%;
   grid-template-rows: 10% 80% 10%;
+}
+body{
+  background: grey;
 }
 #chart-title{
   grid-column: span 2;
@@ -44,8 +47,11 @@
   margin:0;
 }
 .bar{
-  background-color: black;
-  width: 5px;
+  background-color: rgb(199, 197, 197);
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .label{
