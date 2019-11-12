@@ -45,13 +45,23 @@ body{
   text-align: center;
   width: 50px;
   margin:0;
+  overflow: hidden;
 }
+.xlabel:hover{
+  overflow: visible;
+}
+
 .bar{
   background-color: rgb(199, 197, 197);
   width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.bar:hover{
+  overflow: visible;
 }
 
 .label{

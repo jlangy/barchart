@@ -1,7 +1,7 @@
 
 const chartHeight = 400 * 0.8;
 const PERCENT_HEIGHT_FILLED = 0.9;
-const data = [4, 12, 21, 17];
+const data = [45, 12, 21, 170.45235, 100, 125];
 
 function makeChart(){
   const max = Math.max(...data);
