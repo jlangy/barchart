@@ -3,10 +3,19 @@ const chartHeight = 400 * 0.8;
 const chartWidth = 600 * 0.9;
 const DISTANCE_BETWEEN_BARS_PERCENT = 0.2;
 const PERCENT_HEIGHT_FILLED = 0.9;
-const data = [45, 12, 21, 170.45235, 100, 125];
+const data = [['one', 24],['two', 20],['three', 18]];
+const options = {
+  barColour: "red",
+  barSpacing: 0.25,
+  labelColour: "black"
+  // xAxisOverflow: hidden, shown, hover
+  // xAxisTitle:
+  // yAxisTitle:
+}
 
 function makeChart(){
-  const max = Math.max(...data);
+  const values = data.map(array => array[1]);
+  const max = Math.max(...values);
   const increment = getIncrement(max);
   const unitHeight = chartHeight * PERCENT_HEIGHT_FILLED / (increment * Math.ceil((max) / increment));
   makeXLabels();
@@ -15,10 +24,11 @@ function makeChart(){
 }
 
 function loadData(unitHeight) {
-  data.forEach(val => {
-    $('#chart').append("<div class='bar' style='height:" + unitHeight * val + "px'>" + val + "</div>");
+  data.forEach(value => {
+    $('#chart').append("<div class='bar' style='height:" + unitHeight * value[1] + "px'>" + value[1] + "</div>");
   });
-  const barWidth = chartWidth * (1 - DISTANCE_BETWEEN_BARS_PERCENT) / data.length;
+  const barWidth = chartWidth * (1 - options.barSpacing) / data.length;
+  $('.bar').css({"background-color": options.barColour, "color": options.labelColour});
   $('.bar, .xlabel').css("width",String(barWidth));
 }
 
@@ -38,8 +48,8 @@ function makeYLabels(max, increment, unitHeight) {
   }
 }
 function makeXLabels() {
-  data.forEach(val => {
-    $('#x-axis').append("<p class='xlabel'>" + val + "</p>");
+  data.forEach(value => {
+    $('#x-axis').append("<p class='xlabel'>" + value[0] + "</p>");
   });
 }
 function main() {
