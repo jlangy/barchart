@@ -1,5 +1,7 @@
 
 const chartHeight = 400 * 0.8;
+const chartWidth = 600 * 0.9;
+const DISTANCE_BETWEEN_BARS_PERCENT = 0.2;
 const PERCENT_HEIGHT_FILLED = 0.9;
 const data = [45, 12, 21, 170.45235, 100, 125];
 
@@ -7,15 +9,17 @@ function makeChart(){
   const max = Math.max(...data);
   const increment = getIncrement(max);
   const unitHeight = chartHeight * PERCENT_HEIGHT_FILLED / (increment * Math.ceil((max) / increment));
-  loadData(unitHeight);
-  makeYLabels(max, increment, unitHeight);
   makeXLabels();
+  makeYLabels(max, increment, unitHeight);
+  loadData(unitHeight);
 }
 
 function loadData(unitHeight) {
   data.forEach(val => {
     $('#chart').append("<div class='bar' style='height:" + unitHeight * val + "px'>" + val + "</div>");
   });
+  const barWidth = chartWidth * (1 - DISTANCE_BETWEEN_BARS_PERCENT) / data.length;
+  $('.bar, .xlabel').css("width",String(barWidth));
 }
 
 function getIncrement(num){
