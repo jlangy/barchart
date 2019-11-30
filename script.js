@@ -3,10 +3,11 @@ const chartHeight = 400 * 0.8;
 const chartWidth = 600 * 0.9;
 const DISTANCE_BETWEEN_BARS_PERCENT = 0.2;
 const PERCENT_HEIGHT_FILLED = 0.9;
-const data = [['one', [10,20,10]], ['two', [20,50]], ['three', 18]];
-const options = {
-  barColour: "red",
-  barSpacing: 0.25,
+const data = [{label: 'some random data', data: [12,20,10, 30], colours: ['red','white','blue']},
+             {label: 'two', data: [20,50]}, {label: 'three', data: 18}];
+const DEFAULT_COLOUR = 'red';
+             const options = {
+  barSpacing: 0.5,
   labelColour: "black"
   // xAxisOverflow: hidden, shown, hover
   // xAxisTitle:
@@ -23,32 +24,52 @@ function makeChart() {
 }
 
 function findMaximumBarHeight(){
-  let dataWithLabelsRemoved = data.map(dataPoint => dataPoint[1]);
+  let dataWithLabelsRemoved = data.map(dataPoint => dataPoint.data);
   let totalBarHeights = dataWithLabelsRemoved.map(barHeight => Array.isArray(barHeight) ? barHeight.reduce((a,b) => a+b) : barHeight);
   const max = Math.max(...totalBarHeights);
   return max;
 }
-function makeStackedBars(barHeights, unitHeight){
-  let stackedBarsContainer = $("<div class='stackedBar'></div>");
+function makeStackedBars(barHeights, unitHeight, barColours){
+  let stackedBarsContainer = $("<div class='stackedBarContainer'></div>");
   $('#chart').append(stackedBarsContainer);
-  barHeights.forEach(height => {
-    stackedBarsContainer.append("<div class='bar' style='height:" + unitHeight * height + "px'>" + height + "</div>");
+  barHeights.forEach((height, barColourIndex) => {
+    if(barColours && barColours[barColourIndex]){
+      stackedBarsContainer.append("<div class='stackedBar' style='height:" + unitHeight * height + "px; background-color:" + barColours[barColourIndex] + ";'>" + height + "</div>");
+    }
+    else if(options.barColour){
+      stackedBarsContainer.append("<div class='stackedBar' style='height:" + unitHeight * height + "px; background-color:" + options.barColour + ";'>" + height + "</div>");
+    }
+    else{
+      stackedBarsContainer.append("<div class='stackedBar' style='height:" + unitHeight * height + "px; background-color:" + DEFAULT_COLOUR + ";'>" + height + "</div>");
+    }
   });
 }
 
 function loadData(unitHeight) {
   data.forEach(value => {
-    const barHeight = value[1];
+    const barHeight = value.data;
     if (Array.isArray(barHeight)) {
-      makeStackedBars(barHeight, unitHeight);
+      makeStackedBars(barHeight, unitHeight, value.colours);
     }
     else {
-      $('#chart').append("<div class='bar' style='height:" + unitHeight * barHeight + "px'>" + barHeight + "</div>");
+      makeSingleBar(unitHeight, barHeight, value.colours);
     }
   });
+  $('.bar, .stackedBar').css({"color": options.labelColour});
   const barWidth = chartWidth * (1 - options.barSpacing) / data.length;
-  $('.bar').css({ "background-color": options.barColour, "color": options.labelColour });
-  $('.bar, .xlabel').css("width", String(barWidth));
+  $('.bar, .xlabel, .stackedBar').css("width", String(barWidth));
+}
+
+function makeSingleBar(unitHeight, barHeight, colours){
+  if(colours){
+    $('#chart').append("<div class='bar' style='height:" + unitHeight * barHeight + "px; background-color:" + value.colours[0] + ";'>" + barHeight + "</div>");
+  }
+  else if(options.barColour){
+    $('#chart').append("<div class='bar' style='height:" + unitHeight * barHeight + "px; background-color:" + options.barColour + ";'>" + barHeight + "</div>");
+  }
+  else{
+    $('#chart').append("<div class='bar' style='height:" + unitHeight * barHeight + "px; background-color:" + DEFAULT_COLOUR + ";'>" + barHeight + "</div>");
+  }
 }
 
 function getIncrement(num) {
@@ -68,7 +89,7 @@ function makeYLabels(max, increment, unitHeight) {
 }
 function makeXLabels() {
   data.forEach(value => {
-    $('#x-axis').append("<p class='xlabel'>" + value[0] + "</p>");
+    $('#x-axis').append("<p class='xlabel'>" + value.label + "</p>");
   });
 }
 function main() {
