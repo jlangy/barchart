@@ -34,7 +34,8 @@ body{
 }
 
 #chart{
-  border: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
   box-sizing: border-box;
   display: flex;
   justify-content: space-around;
@@ -51,14 +52,16 @@ body{
   overflow: visible;
 }
 
-.bar, .stackedBar{
+.bar{
   width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
 }
 .stackedBarContainer{
   display: flex;
