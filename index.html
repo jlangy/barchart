@@ -1,19 +1,27 @@
 <!DOCTYPE html>
-  <head>
-    <title>Bar Chart</title>
-    <link rel="stylesheet" href="main.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div id="bar-chart">
-      <h2 id="chart-title">Chart Title</h2>
-      <div class='axis' id="y-axis"></div>
-      <div id="chart">
-      </div>
-      <div class='axis' id="x-axis"></div>
 
+<head>
+  <title>Bar Chart</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="bar-chart">
+    <h2 id="chart-title">Chart Title</h2>
+    <div id='y-axis-title-container'>
+      <div>
+        <div id='y-axis-title'>y axis title</div>
+      </div>
     </div>
-    <script src="script.js"></script>
-  </body>
+    <div class='axis' id="y-axis"></div>
+    <div id="chart">
+    </div>
+    <div class='axis' id="x-axis"></div>
+    <div id="x-axis-title">x axis title</div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
 
 </html>

@@ -1,5 +1,5 @@
 
-const chartHeight = 400 * 0.8;
+const chartHeight = 400 * 0.7;
 const chartWidth = 600 * 0.9;
 const DISTANCE_BETWEEN_BARS_PERCENT = 0.2;
 const PERCENT_HEIGHT_FILLED = 0.9;
@@ -7,9 +7,15 @@ const data = [{label: 'some random data', data: [10,20,10], colours: ['red','whi
              {label: 'two', data: [20,50], labelColours: ['blue','rgb(0,255,255)'], colours: ['orange', 'purple']}, {label: 'three', data: 18}];
 const DEFAULT_COLOUR = 'red';
 const DEFAULT_LABEL_COLOUR = 'white';
-             const options = {
+const options = {
   barSpacing: 0.5,
-  labelColour: "black"
+  labelColour: "black",
+  title: "My Fancy New Chart",
+  titleFont: 'Arial',
+  titleFontSize: '2em',
+  titleFontColour: 'black',
+  xAxisTitle: 'My Fancy New Domain',
+  yAxisTitle: 'My Fancy New Range'
   // xAxisOverflow: hidden, shown, hover
   // xAxisTitle:
   // yAxisTitle:
@@ -21,7 +27,14 @@ function makeChart() {
   const unitHeight = chartHeight * PERCENT_HEIGHT_FILLED / (increment * Math.ceil((max) / increment));
   makeXLabels();
   makeYLabels(max, increment, unitHeight);
+  makeTitle();
   loadData(unitHeight);
+}
+
+function makeTitle(){
+  const title = options.title ? options.title : '';
+  $('#chart-title').text(title);
+  $('#chart-title').css({'font-family': options.titleFont, 'font-size': options.titleFontSize, 'color': options.titleFontColour});
 }
 
 function findMaximumBarHeight(){
@@ -49,7 +62,7 @@ function loadData(unitHeight) {
     }
   });
   const barWidth = chartWidth * (1 - options.barSpacing) / data.length;
-  $('.bar, .xlabel, .stackedBar').css("width", String(barWidth));
+  $('.bar, .xlabel').css("width", String(barWidth));
 }
 
 function makeSingleBar(container, unitHeight, barHeight, colours, labelColours, colourIndex){
@@ -74,11 +87,16 @@ function makeYLabels(max, increment, unitHeight) {
   for (let i = 0; i < max + increment; i += increment) {
     $('#y-axis').append('<p class="label" style="height:' + increment * unitHeight + 'px">' + i + '-' + '</p>');
   }
+  const yAxisTitle = options.yAxisTitle ? options.yAxisTitle : '';
+  $('#y-axis-title').text(yAxisTitle);
 }
+
 function makeXLabels() {
   data.forEach(value => {
     $('#x-axis').append("<p class='xlabel'>" + value.label + "</p>");
   });
+  const xAxisTitle = options.xAxisTitle ? options.xAxisTitle : '';
+  $('#x-axis-title').text(xAxisTitle);
 }
 function main() {
   makeChart();
