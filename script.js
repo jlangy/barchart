@@ -8,6 +8,7 @@ const data = [{label: 'some random data', data: [10,20,10], colours: ['red','whi
 const DEFAULT_COLOUR = 'red';
 const DEFAULT_LABEL_COLOUR = 'white';
 const options = {
+  dataPosition: "bottom",
   barSpacing: 0.5,
   labelColour: "black",
   title: "My Fancy New Chart",
@@ -62,7 +63,14 @@ function loadData(unitHeight) {
     }
   });
   const barWidth = chartWidth * (1 - options.barSpacing) / data.length;
+  setBarStyles(barWidth);
+}
+
+function setBarStyles(barWidth){
   $('.bar, .xlabel').css("width", String(barWidth));
+  let dataPosition = options.dataPosition;
+  dataPosition = dataPosition == 'top' ? 'flex-start' : dataPosition == 'center' ? 'center' : 'flex-end';
+  $('.bar').css("align-items", dataPosition);
 }
 
 function makeSingleBar(container, unitHeight, barHeight, colours, labelColours, colourIndex){
