@@ -45,7 +45,6 @@ body{
 }
 .xlabel{
   text-align: center;
-  width: 50px;
   margin:0;
   overflow: hidden;
 }
@@ -56,13 +55,11 @@ body{
 .bar{
   width: 50px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   box-sizing: border-box;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
-  border-top: 1px solid black;
+
 }
 .stackedBarContainer{
   display: flex;
