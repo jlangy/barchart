@@ -1,28 +1,14 @@
-
-const PERCENT_HEIGHT_FILLED = 0.95;
 const data1 = [[4, 1], { label: 'hi', data: [7, 1, 2], colours: ['blue', 'white'], labelColours: ['white', 'green'] }, { data: [3], colours: ['white'] }, 4, 5];
-const DEFAULT_COLOUR = 'red';
-const DEFAULT_LABEL_COLOUR = 'white';
 const options1 = {
-  height: '600px',
-  width: '700px'
-  // dataPosition: "bottom",
-  // barSpacing: 0.4,
-  // barBorders: 'off',
-  // title: "Data",
-  // titleFontSize: '2em',
-  // titleFontColour: 'Blue',
-  // xAxisTitle: 'Domain',
-  // yAxisTitle: 'range',
-  // axisTitleFontSize: '1em',
-  // labelColour: "red",
-  // fontSize: '1em',
-  // yAxisTicks: [0, 1, 2, 3, 4, 5, 7, 8, 9, 10]
+  height: '400px',
+  width: '500px',
+  yAxisTitle: 'My Range',
+  axisTitleFontSize: '1em'
 }
 const data2 = [7,12,17,6,13];
 const options2 = {
-  height: '500px',
-  width: '700px',
+  height: '400px',
+  width: '800px',
   barBorders: 'off',
   title: "Second",
   titleFontSize: '2em',
@@ -35,16 +21,9 @@ const options2 = {
 
 function makeChart(data, options, element) {
   let barChart = $('<div class="barChart"/>').appendTo(element).css({...CSSClasses.barChart, 'height': String(options.height), 'width': String(options.width)});
+  const chartDimensions = getChartDimensions(data, options);
+  options = Object.assign(options, {DEFAULT_COLOUR: 'black', DEFAULT_LABEL_COLOUR: 'white'})
   makeTitles(barChart,options);
-  const chartWidth = Number(options.width.match(/\d*\.*\d*/)[0]) * 0.9;
-  const chartDimensions = {
-    chartWidth: chartWidth,
-    chartWidthUnits: options.width.match(/[a-zA-z]+/)[0],
-    chartHeightUnits: options.height.match(/[a-zA-z]+/)[0],
-    chartHeight: options.height.match(/\d*\.*\d*/)[0],
-    barWidth: chartWidth * (1 - (options.barSpacing ? options.barSpacing : 0.2)) / data.length,
-    unitHeight: getUnitHeight(options,data)
-  }
   makeXLabels(barChart, chartDimensions, data, options);
   makeYLabels(barChart, chartDimensions, options, data);
   loadData(barChart, chartDimensions, data, options);
@@ -53,11 +32,11 @@ function makeChart(data, options, element) {
 function getUnitHeight(options,data) {
   const chartHeight = Number(options.height.match(/\d*\.*\d*/)[0]) * 0.7;
   if (options.yAxisTicks) {
-    return chartHeight * PERCENT_HEIGHT_FILLED / Math.max(...options.yAxisTicks);
+    return chartHeight / Math.max(...options.yAxisTicks);
   } else {
     const max = findMaximumBarHeight(data);
     const increment = getIncrement(max);
-    return chartHeight * PERCENT_HEIGHT_FILLED / (increment * Math.ceil((max) / increment));
+    return chartHeight / (increment * Math.ceil((max) / increment));
   }
 }
 
@@ -69,28 +48,28 @@ function findMaximumBarHeight(data) {
 }
 
 function makeStackedBars(chart, barHeights, chartDimensions, value, options) {
-  const stackedBarsContainer = $("<div/>").appendTo(chart).css(CSSClasses.stackedBarContainer);
+  const stackedBarsContainer = $("<div class=StackedBarContainer/>").appendTo(chart).css(CSSClasses.stackedBarContainer);
   barHeights.forEach((height, colourIndex) => {
     makeSingleBar(stackedBarsContainer, height, value, colourIndex, chartDimensions, options);
   });
 }
 
 function makeSingleBar(container, barHeight, value, colourIndex, chartDimensions, options) {
-  const backGroundColour = (value.colours && value.colours[colourIndex] ? value.colours[colourIndex] : options.barColour ? options.barColour : DEFAULT_COLOUR);
+  const backGroundColour = (value.colours && value.colours[colourIndex] ? value.colours[colourIndex] : options.barColour ? options.barColour : options.DEFAULT_COLOUR);
   const dataPosition = options.dataPosition == 'top' ? 'flex-start' : options.dataPosition == 'bottom' ? 'flex-end' : 'center';
-  const labelColour = (value.labelColours && value.labelColours[colourIndex] ? value.labelColours[colourIndex] : options.labelColour ? options.labelColour : DEFAULT_LABEL_COLOUR);
+  const labelColour = (value.labelColours && value.labelColours[colourIndex] ? value.labelColours[colourIndex] : options.labelColour ? options.labelColour : options.DEFAULT_LABEL_COLOUR);
   const CSS = {...CSSClasses.bar, 'font-size': options.fontSize,
-                  'height': String(chartDimensions.unitHeight * barHeight), 'align-items': dataPosition,
+                  'height': String(chartDimensions.unitHeight * barHeight) + chartDimensions.chartHeightUnits, 'align-items': dataPosition,
                   'background-color': backGroundColour, 'color': labelColour,
                   'width': (String(chartDimensions.barWidth) + chartDimensions.chartWidthUnits)}
   if(options.barBorders == 'on'){
     CSS = Object.assign(CSS, {'border-left': '1px solid black','border-right': '1px solid black','border-top': '1px solid black'});
   }
-  $('<div/>').appendTo(container).css(CSS).text(barHeight);
+  $('<div class=bar/>').appendTo(container).css(CSS).text(barHeight);
 }
 
 function loadData(barChart, chartDimensions, data, options) {
-  const chart = $('<div/>').appendTo(barChart).css(CSSClasses.chart)
+  const chart = $('<div class=chart/>').appendTo(barChart).css(CSSClasses.chart)
   data.forEach(value => {
     const barHeight = value.data ? value.data : value;
     if (Array.isArray(barHeight)) {
@@ -113,11 +92,11 @@ function getIncrement(num) {
 }
 
 function makeYLabels(barChart, chartDimensions, options, data) {
-  const yAxisLabelContainer = $('<div/>').appendTo(barChart).css(CSSClasses.yAxisLabelsContainer)
+  const yAxisLabelContainer = $('<div class=yAxisLabelContainer/>').appendTo(barChart).css(CSSClasses.yAxisLabelsContainer)
   if (options.yAxisTicks) {
     options.yAxisTicks.forEach(function (num, i, arr) {
       const height = i == arr.length - 1 ? 0 : arr[i + 1] - num;
-      $('<div/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel,
+      $('<div class=yAxisLabel/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel,
         'font-size':options.fontSize,'height': String(height * chartDimensions.unitHeight) + chartDimensions.chartHeightUnits}).text(num + '-')
     });
   }
@@ -125,42 +104,56 @@ function makeYLabels(barChart, chartDimensions, options, data) {
     const max = findMaximumBarHeight(data);
     const increment = getIncrement(max);
     for (let i = 0; i < max + increment; i += increment) {
-      $('<div/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel,
+      $('<div class=yAxisLabel/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel,
         'font-size':options.fontSize,'height': String(increment * chartDimensions.unitHeight) + chartDimensions.chartHeightUnits}).text(i + '-')
     }
   }
 }
 
 function makeXLabels(barChart, chartDimensions, data, options) {
-  const xAxis = $('<div/>').appendTo(barChart).css(CSSClasses.xAxis)
+  const xAxis = $('<div class=xAxis/>').appendTo(barChart).css(CSSClasses.xAxis)
   data.forEach(value => {
     const label = value.label == undefined ? '' : value.label;
-    $('<div/>').appendTo(xAxis).text(label)
+    $('<div class=xAxisLabel/>').appendTo(xAxis).text(label)
     .css({...CSSClasses.xLabel, 'font-size':options.fontSize, 'width': (String(chartDimensions.barWidth) + chartDimensions.chartWidthUnits)})
   });
 }
 
 function makeTitles(barChart, options) {
-  const title = options.title ? options.title : '';
-  const xAxisTitle = options.xAxisTitle ? options.xAxisTitle : '';
+  const titleText = options.title ? options.title : '';
+  const xAxisTitleText = options.xAxisTitle ? options.xAxisTitle : '';
   const yAxisTitleText = options.yAxisTitle ? options.yAxisTitle : '';
-  const xAxisElement = $('<div/>').appendTo(barChart).css({...CSSClasses.xAxisTitle, 'font-size':options.axisTitleFontSize}).text(xAxisTitle);
-  const yAxisElement = $('<div/>').appendTo(barChart).css(CSSClasses.yAxisTitleConatiner);
+  const yAxisElement = $('<div class=yAxisTitleContainer/>').appendTo(barChart).css(CSSClasses.yAxisTitleConatiner);
   const widthDiv = $('<div/>').appendTo(yAxisElement);
-  const yAxisTitle = $('<div/>').appendTo(widthDiv).css({...CSSClasses.yAxisTitle, 'font-size':options.axisTitleFontSize}).text(yAxisTitleText);
-  const chartTitle = $('<div/>').appendTo(barChart).css({...CSSClasses.chartTitle, 'font-size':options.titleFontSize}).text(title);
+  $('<div class=xAxisTitle/>').appendTo(barChart).css({...CSSClasses.xAxisTitle, 'font-size':options.axisTitleFontSize}).text(xAxisTitleText);
+  $('<div class=yAxisTitle/>').appendTo(widthDiv).css({...CSSClasses.yAxisTitle, 'font-size':options.axisTitleFontSize}).text(yAxisTitleText);
+  $('<div class=Title/>').appendTo(barChart).css({...CSSClasses.chartTitle, 'font-size':options.titleFontSize}).text(titleText);
+}
+
+function getChartDimensions(data, options){
+  const chartWidth = Number(options.width.match(/\d*\.*\d*/)[0]) * 0.9;
+  const chartDimensions = {
+    chartWidth: chartWidth,
+    chartWidthUnits: options.width.match(/[a-zA-z]+/)[0],
+    chartHeightUnits: options.height.match(/[a-zA-z]+/)[0],
+    chartHeight: options.height.match(/\d*\.*\d*/)[0],
+    barWidth: chartWidth * (1 - (options.barSpacing ? options.barSpacing : 0.2)) / data.length,
+    unitHeight: getUnitHeight(options,data)
+  }
+  return chartDimensions;
 }
 
 
 
 const CSSClasses = {
   barChart: {
-    'background': 'rgb(226, 123, 226)',
+    'background': 'rgb(150,150,150)',
     'border': 'black 1px solid',
     'display': 'grid',
-    'grid-template-columns': '5% 5% 90%',
+    'grid-template-columns': '7% 7% 86%',
     'grid-template-rows': '10% 70% 10% 10%',
-    'margin': 'auto'
+    'margin': 'auto',
+    'overflow': 'hidden'
   },
   chartTitle: {
     'grid-column': 'span 3',
@@ -191,7 +184,8 @@ const CSSClasses = {
       'transform':' rotate(-90deg)',
       'transform-origin':' center',
       'position':' relative',
-      'left':' 1em'
+      'left':' 1em',
+      'padding-bottom': '0.5em'
   },
   xAxis : {
     'display':'flex',
@@ -232,7 +226,6 @@ const CSSClasses = {
     'flex-direction': 'column'
   },
   bar: {
-    'width':' 50px',
     'display':' flex',
     'align-items':' center',
     'justify-content':' center',
