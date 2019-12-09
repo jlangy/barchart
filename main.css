@@ -1,4 +1,4 @@
-#bar-chart{
+/* #bar-chart{
   height: 400px;
   width: 600px;
   background: rgb(226, 123, 226);
@@ -22,8 +22,6 @@ body{
 #y-axis{
   display: flex;
   flex-direction: column-reverse;
-  /*The bottom of each labels bounding rectangle is that labels height.
-  Shifting down 0.5em makes the label tickmark sit right at that height. */
   position: relative;
   top: 0.5em;
 }
@@ -73,9 +71,7 @@ body{
 .label{
   margin: 0;
   padding: 0;
-  /* Prevent height from changing */
   flex: none;
-  /*Uses flex to seat text in bottom right */
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
@@ -84,7 +80,7 @@ body{
 #y-axis-title-container{
   display: flex;
   align-items: center;
-  /* overflow: hidden; */
+  /* overflow: hidden;
 }
 
 #y-axis-title{
@@ -96,7 +92,6 @@ body{
   transform-origin: center;
   position: relative;
   left: 1em;
-  /* font-size: 2em; */
 }
 #x-axis-title{
   grid-column: 3 / 4;
@@ -104,4 +99,4 @@ body{
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
+} */
