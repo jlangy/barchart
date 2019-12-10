@@ -1,22 +1,37 @@
-const data1 = [[4, 1], { label: 'hi', data: [7, 1, 2], colours: ['blue', 'white'], labelColours: ['white', 'green'] }, { data: [3], colours: ['white'] }, 4, 5];
+const data1 = [3,2,5,4,3];
 const options1 = {
   height: '400px',
   width: '500px',
-  yAxisTitle: 'My Range',
-  axisTitleFontSize: '1em'
+  title: 'Simple Chart'
 }
-const data2 = [7,12,17,6,13];
+const data2 = [[3,4], [1,2,1,4], 12, [3,2]];
 const options2 = {
   height: '400px',
-  width: '800px',
-  barBorders: 'off',
-  title: "Second",
+  width: '500px',
+  barBorders: 'on',
+  title: "Stacked Chart",
   titleFontSize: '2em',
-  titleFontColour: 'Blue',
   xAxisTitle: 'Domain',
-  yAxisTitle: 'range',
+  yAxisTitle: 'Range',
   axisTitleFontSize: '1em',
-  fontSize: '1em'
+  fontSize: '1em',
+  barColour: 'red'
+}
+
+const data3 = [{data: [4,3], colours: ['red', 'cyan'], labelColours: ['white', 'black'], label: '2019'},
+               {data: [2,1,2,1], colours: ['red', 'cyan','red', 'cyan'], labelColours: ['white', 'black','white', 'black'], label: '2020'} ];
+
+const options3 = {
+  height: '400px',
+  width: '500px',
+  title: "Stacked Coloured Chart",
+  titleFontSize: '2em',
+  xAxisTitle: 'Domain',
+  yAxisTitle: 'Range',
+  axisTitleFontSize: '1.3em',
+  fontSize: '.8em',
+  yAxisTicks: [1,2,3,4,5,6,7,8],
+  barSpacing: 0.5
 }
 
 function makeChart(data, options, element) {
@@ -58,7 +73,7 @@ function makeSingleBar(container, barHeight, value, colourIndex, chartDimensions
   const backGroundColour = (value.colours && value.colours[colourIndex] ? value.colours[colourIndex] : options.barColour ? options.barColour : options.DEFAULT_COLOUR);
   const dataPosition = options.dataPosition == 'top' ? 'flex-start' : options.dataPosition == 'bottom' ? 'flex-end' : 'center';
   const labelColour = (value.labelColours && value.labelColours[colourIndex] ? value.labelColours[colourIndex] : options.labelColour ? options.labelColour : options.DEFAULT_LABEL_COLOUR);
-  const CSS = {...CSSClasses.bar, 'font-size': options.fontSize,
+  let CSS = {...CSSClasses.bar, 'font-size': options.fontSize,
                   'height': String(chartDimensions.unitHeight * barHeight) + chartDimensions.chartHeightUnits, 'align-items': dataPosition,
                   'background-color': backGroundColour, 'color': labelColour,
                   'width': (String(chartDimensions.barWidth) + chartDimensions.chartWidthUnits)}
@@ -95,9 +110,12 @@ function makeYLabels(barChart, chartDimensions, options, data) {
   const yAxisLabelContainer = $('<div class=yAxisLabelContainer/>').appendTo(barChart).css(CSSClasses.yAxisLabelsContainer)
   if (options.yAxisTicks) {
     options.yAxisTicks.forEach(function (num, i, arr) {
-      const height = i == arr.length - 1 ? 0 : arr[i + 1] - num;
-      $('<div class=yAxisLabel/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel,
-        'font-size':options.fontSize,'height': String(height * chartDimensions.unitHeight) + chartDimensions.chartHeightUnits}).text(num + '-')
+      let height = i == arr.length - 1 ? 0 : arr[i + 1] - num;
+      let CSS = {...CSSClasses.yLabel,'font-size':options.fontSize,'height': String(height * chartDimensions.unitHeight) + chartDimensions.chartHeightUnits}
+      if(i == 0){
+        $('<div class=yAxisLabel/>').appendTo(yAxisLabelContainer).css({...CSSClasses.yLabel, 'height': String(num * chartDimensions.unitHeight) + chartDimensions.chartHeightUnits})
+      }
+      $('<div class=yAxisLabel/>').appendTo(yAxisLabelContainer).css(CSS).text(num + '-')
     });
   }
   else {
@@ -237,6 +255,7 @@ const CSSClasses = {
 function main() {
   makeChart(data1, options1, $('#ex1'));
   makeChart(data2, options2, $('#ex2'));
+  makeChart(data3, options3, $('#ex3'));
 }
 
 $(document).ready(main());

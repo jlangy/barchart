@@ -1,102 +1,37 @@
-/* #bar-chart{
-  height: 400px;
-  width: 600px;
-  background: rgb(226, 123, 226);
-  border: black 1px solid;
-  display: grid;
-  grid-template-columns: 5% 5% 90%;
-  grid-template-rows: 10% 70% 10% 10%;
-  margin:auto;
+.example {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  margin: 40px;
 }
+
+.tab{
+  margin-left: 40px;
+}
+
+.exampleDescription{
+  margin: 20px;
+}
+
+#optionsList{
+  list-style-type: none;
+}
+
+.option{
+  border-left: 5px solid black;
+  padding-left: 5px;
+}
+
+main{
+  width: 80%;
+  margin: auto;
+}
+
 body{
-  background: grey;
-}
-#chart-title{
-  grid-column: span 3;
-  box-sizing: border-box;
-  margin: 0;
-  display: flex;
-  justify-content: space-around;
-  overflow: hidden;
-}
-#y-axis{
-  display: flex;
-  flex-direction: column-reverse;
-  position: relative;
-  top: 0.5em;
+  background: rgb(229, 197, 155);
 }
 
-#x-axis{
-  display: flex;
-  justify-content: space-around;
-  grid-column: 3;
+code{
+  font-size: 1.2em;
+  padding: 3px;
 }
-
-#chart{
-  border-left: 1px solid black;
-  border-bottom: 1px solid black;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  height: 100%;
-}
-.xlabel{
-  text-align: center;
-  margin:0;
-  overflow: hidden;
-}
-.xlabel:hover{
-  overflow: visible;
-}
-
-.bar{
-  width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  box-sizing: border-box;
-
-}
-.stackedBarContainer{
-  display: flex;
-  flex-direction: column;
-}
-
-.bar:hover{
-  overflow: visible;
-}
-
-.label{
-  margin: 0;
-  padding: 0;
-  flex: none;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
-}
-
-#y-axis-title-container{
-  display: flex;
-  align-items: center;
-  /* overflow: hidden;
-}
-
-#y-axis-title{
-  height: 1.5em;
-  white-space: nowrap;
-  margin-left: -100%;
-  text-align: center;
-  transform: rotate(-90deg);
-  transform-origin: center;
-  position: relative;
-  left: 1em;
-}
-#x-axis-title{
-  grid-column: 3 / 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-} */

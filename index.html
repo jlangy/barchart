@@ -5,24 +5,179 @@
   <link rel="stylesheet" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-
 <body>
-  <div id="ex1"></div>
-  <div id="ex2"></div>
-  <!-- <div id="bar-chart">
-    <h2 id="chart-title">Chart Title</h2>
-    <div id='y-axis-title-container'>
-      <div>
-        <div id='y-axis-title'>y axis title</div>
-      </div>
-    </div>
-    <div class='axis' id="y-axis"></div>
-    <div id="chart">
-    </div>
-    <div class='axis' id="x-axis"></div>
-    <div id="x-axis-title">x axis title</div>
+  <!-- height: '400px',
+  width: '800px',
+  barBorders: 'off',
+  title: "Second",
+  titleFontSize: '2em',
+  titleFontColour: 'Blue',
+  xAxisTitle: 'Domain',
+  yAxisTitle: 'range',
+  axisTitleFontSize: '1em',
+  fontSize: '1em'
+  yAxisTicks
+  barColour
+  labelColour
+  dataposition -->
 
-  </div> -->
+  <main>
+    <h1 id="pageTitle">Bar Chart API</h1>
+    <section id='introduction'>
+      <h2>Introduction</h2>
+      <p>This is a simple API to draw a bar chart onto a web page. To use, include the script.js file in your webpage. This file contains
+        the function <code>drawBarChart(element, options, data)</code>, which takes three arguments. The first argument will be the html element
+        to draw the bar chart into. The second element will be a set of custom <a href="#options">options</a>, and the third argument is the
+        <a href="#data">data</a> you want to graph. <a href="#examples">Examples</a> of sample bar charts are listed at the bottom.
+      </p>
+    </section>
+    <section id="options">
+      <h2>Options</h2>
+      <p>The options argument will be an object specifying the properties of the bar chart. The options are listed below.</p>
+      <ul id="optionsList">
+        <li class='option'>
+          <h3>height</h3>
+          <p>The total height for the bar chart to occupy. Enter as a string with units, e.g <code>height: '400px'</code></p>
+        </li>
+        <li class='option'>
+          <h3>width</h3>
+          <p>The total width for the bar chart to occupy. Enter as a string with units, e.g <code>width: '600px'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>title</h3>
+          <p>The title for the bar Chart, e.g <code>title: 'My Chart'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>xAxisTitle</h3>
+          <p>The title for the x axis of the bar chart, e.g <code>xAxisTitle: 'Domain'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>yAxisTitle</h3>
+          <p>The title for the y axis of the bar chart, e.g <code>yAxisTitle: 'Range'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>titleFontSize</h3>
+          <p>The font size for the main title to be in, as a string with units, e.g <code>titleFontSize: '1.5em'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>axisTitleFontSize</h3>
+          <p>The font size for the x and y axis titles, as a string with units, e.g <code>axisTitleFontSize: '1.2em'</code></p>
+        </li>
+        <li class='option'>
+          <h3>titleFontColour</h3>
+          <p>The colour for the title as a string, e.g. <code>titleFontColour: 'rgb(20,40,20)'</code>.</p>
+        </li>
+        <li class='option'>
+          <h3>barBorders</h3>
+          <p>Will include borders surrounding the bars, including individual stacked bars, if set to "on". Borders will be excluded if left out.
+              , e.g. <code>barBorders: 'on'</code>
+          </p>
+        </li>
+        <li class='option'>
+          <h3>fontSize</h3>
+          <p>Sets the font size for the values inside the bars, and the x and y axis labels, e.g. <code>fontSize: '0.8em'</code></p>
+        </li>
+        <li class='option'>
+          <h3>yAxisTicks</h3>
+          <p>Can be used to set custom values on the y-axis. Provide as an array of numbers, e.g. <code>yAxisTicks: [1,2,3,4,5]</code>. If left out, y-axis will take on default values.</p>
+        </li>
+        <li class='option'>
+          <h3>barColour</h3>
+          <p>Sets the colour of bars for the graph. Any data without a specified bar colour will default to this colour. e.g. <code>barColour: 'red'</code></p>
+        </li>
+        <li class='option'>
+          <h3>labelColour</h3>
+          <p>Sets the colour of number values inside the bars for the graph. Any data without a specified label colour will default to this colour.
+             e.g. <code>barColour: 'red'</code></p>
+        </li>
+        <li class='option'>
+          <h3>dataPosition</h3>
+          <p>Sets the position for the data to sit inside the bar. Can be set to "top", "center", or "bottom". If unset, will default to center.
+            e.g. <code>dataPosition: 'bottom'</code>.
+          </p>
+        </li>
+      </ul>
+    </section>
+    <section id="data">
+      <h2>Data</h2>
+      <p>The data parameter can be an array of numbers, arrays, objects, or a mixture. Single number entries will be graphed as a single bar of
+        that height, with default background colour and label colour. Array entries must be an array of numbers. They will be graphed as a stacked
+        bar containing those values. e.g <code>[1,2,3,[4,5],6]</code>
+      </p>
+      <p>
+        If entered as an object, it must have a data property containing either a number, or an array of numbers. It can also have the property
+        colours, which will be an array of the colours for that bar. You can specify the colour for each value of a stacked bar, in order,
+        or have a single array entry if using a single bar. The object can also have the property labelColours, which will specify
+        the colour for each label of the bars in order. e.g <code>[{data: [3,4], colours: ['red', 'blue'], labelColours: ['blue', 'red']},
+        {data: 4, colours: ['red']}, {data:[4,5]}]</code>
+      </p>
+    </section>
+    <section id="examples">
+      <h2>Examples</h2>
+
+      <div id="exampleOne" class='example'>
+        <article class='exampleDescription'>
+          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters: </p>
+          <p><code>data = [3,2,5,4,3] </code>,</p>
+          <p><code>options = {
+                      </br> <span class="tab"></span>height: '400px',
+                      <br/><span class="tab"></span> width: '500px',
+                      <br/><span class="tab"></span> title: 'Simple Chart' <br/>}
+          </code></p>
+        </article>
+        <div id="ex1" class='exampleChart'></div>
+      </div>
+
+      <div id="exampleTwo" class='example'>
+        <article class="exampleDescription">
+          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters </p>
+          <p><code>data = [[3,4], [1,2,1,4], 12, [3,2]]</code>,</p>
+          <p><code>options = {
+            <br/><span class="tab"></span>height: '400px',
+            <br/><span class="tab"></span>width: '500px',
+            <br/><span class="tab"></span>barBorders: 'on',
+            <br/><span class="tab"></span>title: "Stacked Chart",
+            <br/><span class="tab"></span>titleFontSize: '2em',
+            <br/><span class="tab"></span>xAxisTitle: 'Domain',
+            <br/><span class="tab"></span>yAxisTitle: 'Range',
+            <br/><span class="tab"></span>axisTitleFontSize: '1em',
+            <br/><span class="tab"></span>fontSize: '1em',
+            <br/><span class="tab"></span>barColour: 'red' <br/>}
+          </code></p>
+        </article>
+        <div id="ex2"></div>
+      </div>
+
+      <div id="example3" class='example'>
+        <article class="exampleDexcription">
+          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters </p>
+          <p><code>data = [{data: [4,3],
+              <br/><span class="tab"></span>colours: ['red', 'cyan'],
+              <br/><span class="tab"></span>labelColours: ['white', 'black'],
+              <br/><span class="tab"></span>label: '2019'},
+            <br/><span class="tab"></span>{data: [2,1,2,1],
+              <br/><span class="tab"></span>colours: ['red', 'cyan','red', 'cyan'],
+              <br/><span class="tab"></span>labelColours: ['white', 'black','white', 'black'],
+              <br/><span class="tab"></span>label: '2020'}]
+            </code>,</p>
+            <p><code>options = {
+              <br/><span class="tab"></span>height: '400px',
+              <br/><span class="tab"></span>width: '500px',
+              <br/><span class="tab"></span>title: "Stacked Coloured Chart",
+              <br/><span class="tab"></span>titleFontSize: '2em',
+              <br/><span class="tab"></span>xAxisTitle: 'Domain',
+              <br/><span class="tab"></span>yAxisTitle: 'Range',
+              <br/><span class="tab"></span>axisTitleFontSize: '1.3em',
+              <br/><span class="tab"></span>fontSize: '.8em',
+              <br/><span class="tab"></span>yAxisTicks: [1,2,3,4,5,6,7,8],
+              <br/><span class="tab"></span>barSpacing: 0.5
+          }</code></p>
+        </article>
+        <div id="ex3"></div>
+      </div>
+
+    </section>
+  </main>
   <script src="script.js"></script>
 </body>
 
