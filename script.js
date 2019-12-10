@@ -2,7 +2,8 @@ const data1 = [3,2,5,4,3];
 const options1 = {
   height: '400px',
   width: '500px',
-  title: 'Simple Chart'
+  title: 'Simple Chart',
+  backgroundColour: 'Wheat'
 }
 const data2 = [[3,4], [1,2,1,4], 12, [3,2]];
 const options2 = {
@@ -35,13 +36,28 @@ const options3 = {
 }
 
 function makeChart(data, options, element) {
-  let barChart = $('<div class="barChart"/>').appendTo(element).css({...CSSClasses.barChart, 'height': String(options.height), 'width': String(options.width)});
+  const barChartTemplate = getBarChartTemplate(options);
+  const barChartOptionsStyles = {'height': String(options.height), 'width': String(options.width), 'background-color': options.backgroundColour}
+  const barChart = $('<div class="barChart"/>').appendTo(element).css(Object.assign(CSSClasses.barChart,barChartOptionsStyles, barChartTemplate));
   const chartDimensions = getChartDimensions(data, options);
   options = Object.assign(options, {DEFAULT_COLOUR: 'black', DEFAULT_LABEL_COLOUR: 'white'})
   makeTitles(barChart,options);
   makeXLabels(barChart, chartDimensions, data, options);
   makeYLabels(barChart, chartDimensions, options, data);
   loadData(barChart, chartDimensions, data, options);
+}
+
+function getBarChartTemplate(options){
+  if(options.xAxisTitle){
+    if(options.yAxisTitle){
+      return {'grid-template-columns': '7.5% 7.5% 85%', 'grid-template-rows': '10% 75% 7.5% 7.5%'}
+    }
+    return {'grid-template-columns': '0% 7.5% 92.5%', 'grid-template-rows': '10% 75% 7.5% 7.5%'}
+  }
+  if(options.yAxisTitle){
+    return {'grid-template-columns': '7% 7% 86%', 'grid-template-rows': '10% 80% 10% 0%'}
+  }
+  return {'grid-template-columns': '0% 7.5% 92.5%','grid-template-rows': '10% 80% 10% 0%'}
 }
 
 function getUnitHeight(options,data) {
@@ -168,8 +184,6 @@ const CSSClasses = {
     'background': 'rgb(150,150,150)',
     'border': 'black 1px solid',
     'display': 'grid',
-    'grid-template-columns': '7% 7% 86%',
-    'grid-template-rows': '10% 70% 10% 10%',
     'margin': 'auto',
     'overflow': 'hidden'
   },
