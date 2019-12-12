@@ -26,42 +26,50 @@
     <section id='introduction'>
       <h2>Introduction</h2>
       <p>This is a simple API to draw a bar chart onto a web page. To use, include the script.js file in your webpage. This file contains
-        the function <code>drawBarChart(element, options, data)</code>, which takes three arguments. The first argument will be the html element
-        to draw the bar chart into. The second element will be a set of custom <a href="#options">options</a>, and the third argument is the
-        <a href="#data">data</a> you want to graph. <a href="#examples">Examples</a> of sample bar charts are listed at the bottom.
+        the function <code>drawBarChart(data, options, element)</code>, which has three parameters. The first parameter is for an html element
+        to draw the bar chart into. The second parameter is for a set of <a href="#options">options</a> to customize the chart.
+        The third parameter is for the <a href="#data">data</a> that you want to graph. <a href="#examples">Examples</a> of sample bar
+        charts are listed at the bottom.
       </p>
     </section>
     <section id="options">
       <h2>Options</h2>
-      <p>The options argument will be an object specifying the properties of the bar chart. The options are listed below.</p>
+      <p>The options argument will be an object specifying the properties of the bar chart.  For any colour values,
+          use CSS accepted <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/color_value">colours</a>. For any sizes, use CSS accepted
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">lengths</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/percentage"<>
+          percentages</a>. The options are listed below.</p>
       <ul id="optionsList">
         <li class='option'>
           <h3>height</h3>
-          <p>The total height for the bar chart to occupy. Enter as a string with units, e.g <code>height: '400px'</code></p>
+          <p>The total height for the bar chart to occupy. Enter as a string with units, e.g. <code>height: '400px'</code></p>
         </li>
         <li class='option'>
+            <h3>backgroundColour</h3>
+            <p>The colour of the background of the bar chart. Enter as a string, e.g. <code>backgroundColour: 'green'</code></p>
+          </li>
+        <li class='option'>
           <h3>width</h3>
-          <p>The total width for the bar chart to occupy. Enter as a string with units, e.g <code>width: '600px'</code>.</p>
+          <p>The total width for the bar chart to occupy. Enter as a string with units, e.g. <code>width: '600px'</code>.</p>
         </li>
         <li class='option'>
           <h3>title</h3>
-          <p>The title for the bar Chart, e.g <code>title: 'My Chart'</code>.</p>
+          <p>The title for the bar Chart, e.g. <code>title: 'My Chart'</code>.</p>
         </li>
         <li class='option'>
           <h3>xAxisTitle</h3>
-          <p>The title for the x axis of the bar chart, e.g <code>xAxisTitle: 'Domain'</code>.</p>
+          <p>The title for the x axis of the bar chart, e.g. <code>xAxisTitle: 'Domain'</code>.</p>
         </li>
         <li class='option'>
           <h3>yAxisTitle</h3>
-          <p>The title for the y axis of the bar chart, e.g <code>yAxisTitle: 'Range'</code>.</p>
+          <p>The title for the y axis of the bar chart, e.g. <code>yAxisTitle: 'Range'</code>.</p>
         </li>
         <li class='option'>
           <h3>titleFontSize</h3>
-          <p>The font size for the main title to be in, as a string with units, e.g <code>titleFontSize: '1.5em'</code>.</p>
+          <p>The font size for the main title to be in, as a string with units, e.g. <code>titleFontSize: '1.5em'</code>.</p>
         </li>
         <li class='option'>
           <h3>axisTitleFontSize</h3>
-          <p>The font size for the x and y axis titles, as a string with units, e.g <code>axisTitleFontSize: '1.2em'</code></p>
+          <p>The font size for the x and y axis titles, as a string with units, e.g. <code>axisTitleFontSize: '1.2em'</code></p>
         </li>
         <li class='option'>
           <h3>titleFontColour</h3>
@@ -70,7 +78,7 @@
         <li class='option'>
           <h3>barBorders</h3>
           <p>Will include borders surrounding the bars, including individual stacked bars, if set to "on". Borders will be excluded if left out.
-              , e.g. <code>barBorders: 'on'</code>
+              e.g. <code>barBorders: 'on'</code>
           </p>
         </li>
         <li class='option'>
@@ -102,14 +110,14 @@
       <h2>Data</h2>
       <p>The data parameter can be an array of numbers, arrays, objects, or a mixture. Single number entries will be graphed as a single bar of
         that height, with default background colour and label colour. Array entries must be an array of numbers. They will be graphed as a stacked
-        bar containing those values. e.g <code>[1,2,3,[4,5],6]</code>
+        bar containing those values. e.g <code>[[1,2,3],[4,5],[6,7]]</code>. The order of entries should be top down, i.e the first entry in the array
+        will be the top section of the stacked bar.
       </p>
       <p>
         If entered as an object, it must have a data property containing either a number, or an array of numbers. It can also have the property
         colours, which will be an array of the colours for that bar. You can specify the colour for each value of a stacked bar, in order,
-        or have a single array entry if using a single bar. The object can also have the property labelColours, which will specify
-        the colour for each label of the bars in order. e.g <code>[{data: [3,4], colours: ['red', 'blue'], labelColours: ['blue', 'red']},
-        {data: 4, colours: ['red']}, {data:[4,5]}]</code>
+        or have a single array entry if using a single bar, e.g. <code>{data: 1, color:['red']}</code>. The object can also have the property labelColours, which will specify
+        the colour for each label of the bars in order. e.g <code>{data: [3,4], colours: ['red', 'blue'], labelColours: ['blue', 'red']}</code>
       </p>
     </section>
     <section id="examples">
@@ -149,7 +157,7 @@
       </div>
 
       <div id="example3" class='example'>
-        <article class="exampleDexcription">
+        <article class="exampleDescription">
           <p>Calls <code>drawBarChart(data, options, element)</code> with parameters </p>
           <p><code>data = [{data: [4,3],
               <br/><span class="tab"></span>colours: ['red', 'cyan'],
@@ -179,6 +187,7 @@
     </section>
   </main>
   <script src="script.js"></script>
+  <script src="makeExamples.js"></script>
 </body>
 
 </html>
