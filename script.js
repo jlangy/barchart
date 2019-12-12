@@ -119,6 +119,11 @@ function makeXLabels(barChart, chartDimensions, data, options) {
     const label = value.label == undefined ? '' : value.label;
     $('<div class=xAxisLabel/>').appendTo(xAxis).text(label)
     .css({...CSSClasses.xLabel, 'font-size':options.fontSize, 'width': (String(chartDimensions.barWidth) + chartDimensions.chartWidthUnits)})
+    .hover(function(){
+      $(this).css('overflow', 'visible');
+    }, function(){
+      $(this).css('overflow', 'hidden');
+    });
   });
 }
 
