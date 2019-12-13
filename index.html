@@ -39,67 +39,76 @@
           <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/length">lengths</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/percentage"<>
           percentages</a>. The options are listed below.</p>
       <ul id="optionsList">
+        <h3>General</h3>
         <li class='option'>
-          <h3>height</h3>
+          <h4>height</h4>
           <p>The total height for the bar chart to occupy. Enter as a string with units, e.g. <code>height: '400px'</code></p>
         </li>
         <li class='option'>
-            <h3>backgroundColour</h3>
-            <p>The colour of the background of the bar chart. Enter as a string, e.g. <code>backgroundColour: 'green'</code></p>
-          </li>
-        <li class='option'>
-          <h3>width</h3>
+          <h4>width</h4>
           <p>The total width for the bar chart to occupy. Enter as a string with units, e.g. <code>width: '600px'</code>.</p>
         </li>
         <li class='option'>
-          <h3>title</h3>
+          <h4>backgroundColour</h4>
+          <p>The colour of the background of the bar chart. Enter as a string, e.g. <code>backgroundColour: 'green'</code></p>
+        </li>
+        <li class='option'>
+          <h4>yAxisTicks</h4>
+          <p>Can be used to set custom values on the y-axis. Provide as an array of numbers, e.g. <code>yAxisTicks: [1,2,3,4,5]</code>. If left out, y-axis will take on default values.</p>
+        </li>
+        <li class='option'>
+          <h4>fontSize</h4>
+          <p>Sets the font size for the values inside the bars, and the x and y axis labels, e.g. <code>fontSize: '0.8em'</code></p>
+        </li>
+        <h3>Titles</h3>
+        <li class='option'>
+          <h4>title</h4>
           <p>The title for the bar Chart, e.g. <code>title: 'My Chart'</code>.</p>
         </li>
         <li class='option'>
-          <h3>xAxisTitle</h3>
-          <p>The title for the x axis of the bar chart, e.g. <code>xAxisTitle: 'Domain'</code>.</p>
-        </li>
-        <li class='option'>
-          <h3>yAxisTitle</h3>
-          <p>The title for the y axis of the bar chart, e.g. <code>yAxisTitle: 'Range'</code>.</p>
-        </li>
-        <li class='option'>
-          <h3>titleFontSize</h3>
+          <h4>titleFontSize</h4>
           <p>The font size for the main title to be in, as a string with units, e.g. <code>titleFontSize: '1.5em'</code>.</p>
         </li>
         <li class='option'>
-          <h3>axisTitleFontSize</h3>
-          <p>The font size for the x and y axis titles, as a string with units, e.g. <code>axisTitleFontSize: '1.2em'</code></p>
-        </li>
-        <li class='option'>
-          <h3>titleFontColour</h3>
+          <h4>titleFontColour</h4>
           <p>The colour for the title as a string, e.g. <code>titleFontColour: 'rgb(20,40,20)'</code>.</p>
         </li>
         <li class='option'>
-          <h3>barBorders</h3>
+          <h4>xAxisTitle</h4>
+          <p>The title for the x axis of the bar chart, e.g. <code>xAxisTitle: 'Domain'</code>.</p>
+        </li>
+        <li class='option'>
+          <h4>yAxisTitle</h4>
+          <p>The title for the y axis of the bar chart, e.g. <code>yAxisTitle: 'Range'</code>.</p>
+        </li>
+        <li class='option'>
+          <h4>axisTitleFontSize</h4>
+          <p>The font size for the x and y axis titles, as a string with units, e.g. <code>axisTitleFontSize: '1.2em'</code></p>
+        </li>
+        <h3>Bar Styling</h3>
+        <li class='option'>
+          <h4>barBorders</h4>
           <p>Will include borders surrounding the bars, including individual stacked bars, if set to "on". Borders will be excluded if left out.
               e.g. <code>barBorders: 'on'</code>
           </p>
         </li>
         <li class='option'>
-          <h3>fontSize</h3>
-          <p>Sets the font size for the values inside the bars, and the x and y axis labels, e.g. <code>fontSize: '0.8em'</code></p>
+          <h4>barSpacing</h4>
+          <p>The amount of space to have between bars on the graph. Enter as a decimal number between 0 and 1, where 0 would have no space between the bars.
+              e.g. <code>barSpacing: 0.1</code>
+          </p>
         </li>
         <li class='option'>
-          <h3>yAxisTicks</h3>
-          <p>Can be used to set custom values on the y-axis. Provide as an array of numbers, e.g. <code>yAxisTicks: [1,2,3,4,5]</code>. If left out, y-axis will take on default values.</p>
-        </li>
-        <li class='option'>
-          <h3>barColour</h3>
+          <h4>barColour</h4>
           <p>Sets the colour of bars for the graph. Any data without a specified bar colour will default to this colour. e.g. <code>barColour: 'red'</code></p>
         </li>
         <li class='option'>
-          <h3>labelColour</h3>
+          <h4>labelColour</h4>
           <p>Sets the colour of number values inside the bars for the graph. Any data without a specified label colour will default to this colour.
              e.g. <code>barColour: 'red'</code></p>
         </li>
         <li class='option'>
-          <h3>dataPosition</h3>
+          <h4>dataPosition</h4>
           <p>Sets the position for the data to sit inside the bar. Can be set to "top", "center", or "bottom". If unset, will default to center.
             e.g. <code>dataPosition: 'bottom'</code>.
           </p>

@@ -19,7 +19,7 @@ const options2 = {
   barColour: 'red'
 }
 
-const data3 = [{ data: [4, 3], colours: ['red', 'cyan'], labelColours: ['white', 'black'], label: '2019' },
+const data3 = [{ data: [4, 3], colours: ['red', 'cyan'], labelColours: ['white', 'black'], label: 'A really really long x axis label that overflows' },
 { data: [2, 1, 2, 1], colours: ['red', 'cyan', 'red', 'cyan'], labelColours: ['white', 'black', 'white', 'black'], label: '2020' }];
 
 const options3 = {
