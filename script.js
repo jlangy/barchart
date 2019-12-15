@@ -135,18 +135,19 @@ function makeTitles(barChart, options) {
   const widthDiv = $('<div/>').appendTo(yAxisElement);
   $('<div class=xAxisTitle/>').appendTo(barChart).css({...CSSClasses.xAxisTitle, 'font-size':options.axisTitleFontSize}).text(xAxisTitleText);
   $('<div class=yAxisTitle/>').appendTo(widthDiv).css({...CSSClasses.yAxisTitle, 'font-size':options.axisTitleFontSize}).text(yAxisTitleText);
-  $('<div class=Title/>').appendTo(barChart).css({...CSSClasses.chartTitle, 'font-size':options.titleFontSize}).text(titleText);
+  $('<div class=Title/>').appendTo(barChart).css({...CSSClasses.chartTitle, 'font-size':options.titleFontSize, 'color': options.titleFontColour}).text(titleText);
 }
 
 function getChartDimensions(data, options){
   //Matches the number without units
   const chartWidth = Number(options.width.match(/\d*\.*\d*/)[0]) * 0.9;
+  let barSpacing = (options.barSpacing && 0 <= options.barSpacing && options.barSpacing < 1) ? options.barSpacing : 0.2;
   const chartDimensions = {
     chartWidth: chartWidth,
     chartWidthUnits: options.width.match(/[a-zA-z]+/)[0],
     chartHeightUnits: options.height.match(/[a-zA-z]+/)[0],
     chartHeight: options.height.match(/\d*\.*\d*/)[0],
-    barWidth: chartWidth * (1 - (options.barSpacing ? options.barSpacing : 0.2)) / data.length,
+    barWidth: chartWidth * (1 - barSpacing) / data.length,
     unitHeight: getUnitHeight(options,data)
   }
   return chartDimensions;
