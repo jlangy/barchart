@@ -53,6 +53,8 @@ const options = {
 ```
 ![Example 1](stackedOptionsExample.png)
 
+For more examples, see the [demo page](https://jlangy.github.io/barchart/)
+
 ## Functions
 
 `drawBarChart(data, options, element)`: The function to call to make the bar chart. It takes three arguments, `data`, 
