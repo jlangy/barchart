@@ -25,7 +25,7 @@
     <h1 id="pageTitle">Bar Chart API</h1>
     <section id='introduction'>
       <h2>Introduction</h2>
-      <p>This is a simple API to draw a bar chart onto a web page. To use, include the script.js file in your webpage. This file contains
+      <p>This is an API to draw a bar chart onto a web page. To use, include the drawBarChart.js file in your webpage. This file contains
         the function <code>drawBarChart(data, options, element)</code>, which has three parameters. The first parameter is for an html element
         to draw the bar chart into. The second parameter is for a set of <a href="#options">options</a> to customize the chart.
         The third parameter is for the <a href="#data">data</a> that you want to graph. <a href="#examples">Examples</a> of sample bar
@@ -147,8 +147,8 @@
 
       <div id="exampleTwo" class='example'>
         <article class="exampleDescription">
-          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters </p>
-          <p><code>data = [[3,4], [1,2,1,4], 12, [3,2]]</code>,</p>
+          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters: </p>
+          <p><code>data = [[3,4], [3,7,4], 12, [3,2]]</code>,</p>
           <p><code>options = {
             <br/><span class="tab"></span>height: '400px',
             <br/><span class="tab"></span>width: '500px',
@@ -157,8 +157,7 @@
             <br/><span class="tab"></span>titleFontSize: '2em',
             <br/><span class="tab"></span>xAxisTitle: 'Domain',
             <br/><span class="tab"></span>yAxisTitle: 'Range',
-            <br/><span class="tab"></span>axisTitleFontSize: '1em',
-            <br/><span class="tab"></span>fontSize: '1em',
+            <br/><span class="tab"></span>labelColour: 'black',
             <br/><span class="tab"></span>barColour: 'red' <br/>}
           </code></p>
         </article>
@@ -167,35 +166,37 @@
 
       <div id="example3" class='example'>
         <article class="exampleDescription">
-          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters </p>
+          <p>Calls <code>drawBarChart(data, options, element)</code> with parameters: </p>
           <p><code>data = [{data: [4,3],
-              <br/><span class="tab"></span>colours: ['red', 'cyan'],
+              <br/><span class="tab"></span>colours: ['red', 'blue'],
               <br/><span class="tab"></span>labelColours: ['white', 'black'],
               <br/><span class="tab"></span>label: '2019'},
             <br/><span class="tab"></span>{data: [2,1,2,1],
-              <br/><span class="tab"></span>colours: ['red', 'cyan','red', 'cyan'],
-              <br/><span class="tab"></span>labelColours: ['white', 'black','white', 'black'],
+              <br/><span class="tab"></span>colours: ['red', 'blue','red', 'blue'],
+              <br/><span class="tab"></span>labelColours: ['black','white', 'black', 'white'],
               <br/><span class="tab"></span>label: '2020'}]
             </code>,</p>
             <p><code>options = {
               <br/><span class="tab"></span>height: '400px',
               <br/><span class="tab"></span>width: '500px',
+              <br/><span class="tab"></span>backgroundColour: 'white',
               <br/><span class="tab"></span>title: "Stacked Coloured Chart",
-              <br/><span class="tab"></span>titleFontSize: '2em',
+              <br/><span class="tab"></span>titleFontSize: '1.5em',
               <br/><span class="tab"></span>xAxisTitle: 'Domain',
               <br/><span class="tab"></span>yAxisTitle: 'Range',
-              <br/><span class="tab"></span>axisTitleFontSize: '1.3em',
-              <br/><span class="tab"></span>fontSize: '.8em',
+              <br/><span class="tab"></span>axisTitleFontSize: '1.2em',
+              <br/><span class="tab"></span>fontSize: '1.2em',
               <br/><span class="tab"></span>yAxisTicks: [1,2,3,4,5,6,7,8],
-              <br/><span class="tab"></span>barSpacing: 0.5
-          }</code></p>
+              <br/><span class="tab"></span>barSpacing: 0.5,
+              <br/><span class="tab"></span>dataPosition: 'top'
+          <br/>}</code></p>
         </article>
         <div id="ex3"></div>
       </div>
 
     </section>
   </main>
-  <script src="script.js"></script>
+  <script src="drawBarChart.js"></script>
   <script src="makeExamples.js"></script>
 </body>
 
