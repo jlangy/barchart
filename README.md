@@ -2,7 +2,7 @@
 
 ## About
 This is an API to render a bar chart into your webpage. It can draw a chart with either single or stacked bars,
-and includes many customizable style options. To use, include the script.js file in your webpage, and call the 
+and includes many customizable style options. To use, include the drawBarChart.js file in your webpage, and call the 
 `drawBarChart(data, options, element)` function.
 
 ## Examples
